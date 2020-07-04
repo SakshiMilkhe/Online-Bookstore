@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+
+    <title>Home Page</title>
+    <style>
+        #home{padding-top:50px;height:760px;background-color:azure;margin-right:100px;margin-left:100px;opacity:0.3; }
+        #popular{padding-top:50px;height:760px;background-color:black;margin-right:100px;margin-left:100px;opacity:0.3;}
+        #contactus{padding-top:50px;height:760px;background-color:cadetblue;margin-right:100px;margin-left:100px;opacity:0.3;}
+        body  {
+              background-image: url("https://images.wallpaperscraft.com/image/inscription_books_inspiration_119014_1920x1080.jpg");
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+        }
+        .checked {
+          color: orange;
+        }
+        .container
+        {
+            width:100%;
+            margin-top:10%;
+            font-family:sans-serif;
+            letter-spacing:1px;
+        }
+        .container h2
+        {
+
+            width:200px;
+            font-size:24px;
+
+            height:40px;
+        }
+        .container h2::after
+        {
+
+        }
+        .row
+        {
+            margin-top:30px;
+        }
+
+
+        .overlay
+        {
+            display:block;
+            opacity:0;
+            position:absolute;
+            top:10%;
+            margin-left:0;
+            width:70px;
+            margin-bottom:0px;
+        }
+        .product-top:hover .overlay
+        {
+            opacity:1;
+            margin-left:5%;
+            transition:0.5s;
+            margin-bottom:0px;
+        }
+        .overlay .fa
+        {
+            cursor:pointer;
+            background-color:#fff;
+            color:#000;
+            height:35px;
+            width:35px;
+            font-size:20px;
+            padding:7px;
+
+
+        }
+        .overlay .btn-secondary
+        {
+            background:transparent;
+            border:none;
+            box-shadow:none;
+        }
+        .container
+        {
+            margin-top:100px;
+        }
+        .newarrival
+        {
+            background:green;
+            width:50px;
+            color:white;
+            font-size:12px;
+            font-weight:bold;
+        }
+
+        .star-rating
+        {
+            height:15px;
+        }
+        .price
+        {
+            color:#FE980F;
+            font-size:22px;
+            font-weight:bold;
+
+        }
+        input
+        {
+            border:1px solid #ccc;
+            font-weight:bold;
+            height:33px;
+            text-align:center;
+            width:30px;
+        }
+        .cart
+        {
+            background:#FE980F;
+            color:#FFFFFF;
+            font-size:15px;
+            margin-left:20px;
+        }
+        .heart
+        {
+            background:pink;
+            margin-left:20px;
+        }
+        .buy
+        {
+            font-weight:bold;
+            background:#ccc;
+
+        }
+        .panel-heading .accordion-toggle:after
+        {
+
+            font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+            content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+            float: right;        /* adjust as needed */
+            color: grey;         /* adjust as needed */
+        }
+        .panel-heading .accordion-toggle.collapsed:after {
+            /* symbol for "collapsed" panels */
+            content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+        }
+        .site-footer
+        {
+          background-color:#26272b;
+
+          bottom:0px;
+          font-size:15px;
+          line-height:24px;
+          color:#737373;
+        }
+        .site-footer hr
+        {
+          border-top-color:#bbb;
+          opacity:0.5
+        }
+        .site-footer hr.small
+        {
+          margin:20px 0
+        }
+        .site-footer h6
+        {
+          color:#fff;
+          font-size:16px;
+          text-transform:uppercase;
+          margin-top:5px;
+          letter-spacing:2px
+        }
+        .site-footer a
+        {
+          color:#737373;
+        }
+        .site-footer a:hover
+        {
+          color:#3366cc;
+          text-decoration:none;
+        }
+        .footer-links
+        {
+          padding-left:0;
+          list-style:none
+        }
+        .footer-links li
+        {
+          display:block
+        }
+        .footer-links a
+        {
+          color:#737373
+        }
+        .footer-links a:active,.footer-links a:focus,.footer-links a:hover
+        {
+          color:#3366cc;
+          text-decoration:none;
+        }
+        .footer-links.inline li
+        {
+          display:inline-block
+        }
+        .site-footer .social-icons
+        {
+          text-align:right
+        }
+        .site-footer .social-icons a
+        {
+          width:40px;
+          height:40px;
+          line-height:40px;
+          margin-left:6px;
+          margin-right:0;
+          border-radius:100%;
+          background-color:#33353d
+        }
+        .copyright-text
+        {
+          margin:0
+        }
+        @media (max-width:791px)
+        {
+          .site-footer [class^=col-]
+          {
+            margin-bottom:30px
+          }
+        }
+        @media (max-width:767px)
+        {
+          .site-footer
+          {
+            padding-bottom:0
+          }
+          .site-footer .copyright-text,.site-footer .social-icons
+          {
+            text-align:center
+          }
+        }
+        .social-icons
+        {
+          padding-left:0;
+          margin-bottom:0;
+          list-style:none
+        }
+        .social-icons li
+        {
+          display:inline-block;
+          margin-bottom:4px
+        }
+        .social-icons li.title
+        {
+          margin-right:15px;
+          text-transform:uppercase;
+          color:#96a2b2;
+          font-weight:700;
+          font-size:13px
+        }
+        .social-icons a{
+          background-color:#eceeef;
+          color:#818a91;
+          font-size:16px;
+          display:inline-block;
+          line-height:44px;
+          width:44px;
+          height:44px;
+          text-align:center;
+          margin-right:8px;
+          border-radius:100%;
+          -webkit-transition:all .2s linear;
+          -o-transition:all .2s linear;
+          transition:all .2s linear
+        }
+        .social-icons a:active,.social-icons a:focus,.social-icons a:hover
+        {
+          color:#fff;
+          background-color:#29aafe
+        }
+        .social-icons.size-sm a
+        {
+          line-height:34px;
+          height:34px;
+          width:34px;
+          font-size:14px
+        }
+        .social-icons a.facebook:hover
+        {
+          background-color:#3b5998
+        }
+        .social-icons a.twitter:hover
+        {
+          background-color:#00aced
+        }
+        .social-icons a.linkedin:hover
+        {
+          background-color:#007bb6
+        }
+        .social-icons a.dribbble:hover
+        {
+          background-color:#ea4c89
+        }
+        @media (max-width:767px)
+        {
+          .social-icons li.title
+          {
+            display:block;
+            margin-right:0;
+            font-weight:600
+          }
+        }
+
+
+    </style>
+    <script>
+
+
+    </script>
+</head>
+<body >
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom:0px;height:70px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="data:image/png;base64,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" style="height:50px;width:50px"></a>
+
+            </div>
+            <ul class="nav navbar-nav" >
+                <li ><a href="{% url 'book-home' %}"><h4>Home</h4></a></li>
+                <li ><a href="{% url 'book-about' %}"><h4>About</h4></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'user-profile' %}"><h4>Profile</h4></a> </li>
+                <li><a href="{% url 'logout' %}"><h4>Log Out</h4></a> </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}?next={{request.path}}"><h4>Login</h4></a></li>
+                    <li><a href="{% url 'register' %}"><h4>Sign up</h4></a></li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+
+
+        {% block content%}
+
+        {% endblock %}
+
+  <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">This is an online website for buying books all at one place. Save the books you like and come back later!!</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li><a href="http://scanfcode.com/category/c-language/">Mystery</a></li>
+              <li><a href="http://scanfcode.com/category/front-end-development/">Romance</a></li>
+              <li><a href="http://scanfcode.com/category/back-end-development/">Thriller</a></li>
+              <li><a href="http://scanfcode.com/category/java-programming-language/">Education</a></li>
+              <li><a href="http://scanfcode.com/category/android/">Cooking</a></li>
+              <li><a href="http://scanfcode.com/category/templates/">And Many more..</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="{% url 'book-about' %}">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
+         <a href="#">BookMe</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "books/base.html" %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class="container">
+        {% for user in users %}
+            <div class="row" style="margin-left:150px;margin-right:150px;background: rgba(255, 255, 255, 0.6);">
+                <h3 style="margin-left:75px">{{user.username}}</h3>
+                <a href="{% url 'user-orderList' user.id %}"><h4 style="float:right">View orders</h4></a>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% extends "books/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!---
+<div class="container">
+    <div style="width:100%;background-color:white;opacity:0.5;">
+
+    </div>
+     <div class="col-md-3" style="height:350px;width:250px;border-radius: 15px;">
+         <div class="product-top"style="border-style: solid;border-radius: 15px;">
+             <img src="{{ book.book_url}}" style="height:200px;width:200px;border-radius: 15px;">
+             <div class="overlay" style="margin-bottom:0px;">
+
+                 <button type="button" class="btn btn-secondary" title="Add to Wish-list"><i class="fa fa-heart-o"></i></button>
+                 <form class="navbar-form"   method="POST">
+                     {% csrf_token %}
+                     {{ c_form| crispy }}
+                     <input type="hidden" id="book_id" name="book_id" value="{{book.id}}">
+                     <input type="hidden" id="user_id" name="user_id" value="{{user.id}}">
+
+
+                     <button type="submit" class="btn btn-secondary" title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
+                 </form>
+
+             </div>
+             <div class="text-center" style="width:auto;height:100px;margin-top:0px;background: rgba(255, 255, 255, 0.6);border-radius: 15px;">
+                 <h5><b>{{book.book_name}}</b></h5>
+                 <div style="bottom:0px;float:center;">
+                     <a href="#" class="btn btn-primary">{{book.price}}</a>
+                 </div>
+             </div>
+         </div>
+     </div>
+</div>
+
+--->
+
+<div class="container" style="background: rgba(255, 255, 255, 0.6);">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{book.book_url}}">
+            </div>
+            <div class="col-md-8">
+                <p class="newarrival text-center" style="width:100%">BOOK DETAILS</p>
+                <h3 style="width:100%"><b>{{book.book_name}}</b></h3>
+                <div class="star-rating">
+                    <ul class="list-inline">
+
+                        {% if book.average_rating > 4 %}
+                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                            <li style="background-color:green;border-radius:10px;height:30px"><h4 class="list-inline-item" style="color:black" >{{book.average_rating}}</h4></li>
+                        {% endif %}
+                        {% if  book.average_rating > 3 and book.average_rating <= 4 %}
+                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                            <li style="background-color:orange;border-radius:10px;height:30px"><h4 class="list-inline-item" style="color:black" >{{book.average_rating}}</h4></li>
+
+                        {% endif %}
+                        {% if  book.average_rating > 2 and book.average_rating <= 3 %}
+                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                            <li style="background-color:red;border-radius:10px;height:30px"><h4 class="list-inline-item" style="color:black" >{{book.average_rating}}</h4></li>
+
+                        {% endif %}
+
+
+                    </ul>
+                </div>
+                <br>
+                <p><b>Book Author : </b>{{book.book_author}}</p>
+                <p><b>Book Genre : </b>{{book.book_genre}}</p>
+                <p class="price">RS {{book.price}}</p>
+
+                <label>Quantity available: {{book.book_no}}</label>
+                <div class="row" style="display: flex;width: 100%;">
+                    <div class="block">
+                        <form action="{% url 'book-adminDetail' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary" name="delete">Delete</button>
+                        </form>
+                    </div>
+                    <div class="block" style="margin-left:50px">
+
+                            <input type="hidden" name="book">
+                            <a href="{% url 'book-update' book.id %}" ><button  class="btn btn-primary" name="update">Update</button> </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}

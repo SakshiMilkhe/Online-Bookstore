@@ -1,0 +1,43 @@
+{% extends "books/base.html" %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for user in filter.qs %}
+    <li>{{ user.username }} - {{ user.get_full_name }}</li>
+  {% endfor %}
+  </ul>
+<div class="row" style="text-align:center">
+        {% if books.has_other_pages %}
+                <ul class="pagination">
+                {% if books.has_previous %}
+                <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in books.paginator.page_range %}
+                    {% if books.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if books.has_next %}
+                <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends "books/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+        <div class="panel panel-default "  style="margin-top:10px; align-items:center; margin-left:350px;width:50%;height:35% ">
+            <div style="margin-left:15px;margin-right:15px">
+
+
+
+                <form method="POST", enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Book Create </legend>
+                        {{ c_form| crispy }}
+
+
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btm-outline-info "type="submit">Save</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends "books/base.html" %}
+{% block content %}
+<div class="container">
+        <div style="width:100%;background-color:white;opacity:0.5;">
+            <h2 style="text-align:center;width:100%"><b>Based on your Search </b></h2>
+        </div>
+    {% for book in books  %}
+
+
+                <div class="col-md-3" style="height:350px;width:250px;border-radius: 15px;">
+                    <div class="product-top"style="border-style: solid;border-radius: 15px;">
+                            <img src="{{ book.book_url}}" style="height:200px;width:200px;border-radius: 15px;">
+                            <div class="overlay" style="margin-bottom:0px;">
+                                <button type="button" class="btn btn-secondary" title="Quick Shop"><a href="{% url 'book-detail' book.id %}"><i class="fa fa-eye"></i></a></button>
+
+                            </div>
+                            <div class="text-center" style="width:auto;height:100px;margin-top:0px;background: rgba(255, 255, 255, 0.6);border-radius: 15px;position:relative">
+                                <h5><b>{{book.book_name}}</b></h5>
+                                <div style="bottom:0px;float:center;">
+                                    <h3 style="position:absolute;bottom:0;"><b>Rs {{book.price}}.00</b></h3>
+                                </div>
+                            </div>
+
+                    </div>
+
+                </div>
+
+        {% endfor %}
+    <div class="row" style="text-align:center">
+        {% if books.has_other_pages %}
+                <ul class="pagination">
+                {% if books.has_previous %}
+                <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in books.paginator.page_range %}
+                    {% if books.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if books.has_next %}
+                <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+</div>
+{% endblock content %}

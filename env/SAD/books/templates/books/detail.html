@@ -1,0 +1,137 @@
+{% extends "books/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!---
+<div class="container">
+    <div style="width:100%;background-color:white;opacity:0.5;">
+
+    </div>
+     <div class="col-md-3" style="height:350px;width:250px;border-radius: 15px;">
+         <div class="product-top"style="border-style: solid;border-radius: 15px;">
+             <img src="{{ book.book_url}}" style="height:200px;width:200px;border-radius: 15px;">
+             <div class="overlay" style="margin-bottom:0px;">
+
+                 <button type="button" class="btn btn-secondary" title="Add to Wish-list"><i class="fa fa-heart-o"></i></button>
+                 <form class="navbar-form"   method="POST">
+                     {% csrf_token %}
+                     {{ c_form| crispy }}
+                     <input type="hidden" id="book_id" name="book_id" value="{{book.id}}">
+                     <input type="hidden" id="user_id" name="user_id" value="{{user.id}}">
+
+
+                     <button type="submit" class="btn btn-secondary" title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>
+                 </form>
+
+             </div>
+             <div class="text-center" style="width:auto;height:100px;margin-top:0px;background: rgba(255, 255, 255, 0.6);border-radius: 15px;">
+                 <h5><b>{{book.book_name}}</b></h5>
+                 <div style="bottom:0px;float:center;">
+                     <a href="#" class="btn btn-primary">{{book.price}}</a>
+                 </div>
+             </div>
+         </div>
+     </div>
+</div>
+
+--->
+
+<div class="container" style="background: rgba(255, 255, 255, 0.6);">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{book.book_url}}">
+            </div>
+            <div class="col-md-8">
+                <p class="newarrival text-center" style="width:100%">BOOK DETAILS</p>
+                <h3 style="width:100%"><b>{{book.book_name}}</b></h3>
+                <div class="star-rating">
+                    <ul class="list-inline">
+
+                        {% if book.average_rating > 4 %}
+                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                            <li style="background-color:green;border-radius:10px;height:30px"><h4 class="list-inline-item" style="color:black" >{{book.average_rating}}</h4></li>
+                        {% endif %}
+                        {% if  book.average_rating > 3 and book.average_rating <= 4 %}
+                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                            <li style="background-color:orange;border-radius:10px;height:30px"><h4 class="list-inline-item" style="color:black" >{{book.average_rating}}</h4></li>
+
+                        {% endif %}
+                        {% if  book.average_rating > 2 and book.average_rating <= 3 %}
+                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                            <li style="background-color:red;border-radius:10px;height:30px"><h4 class="list-inline-item" style="color:black" >{{book.average_rating}}</h4></li>
+
+                        {% endif %}
+
+
+                    </ul>
+                </div>
+                <br>
+                <p><b>Book Author : </b>{{book.book_author}}</p>
+                <p><b>Book Genre : </b>{{book.book_genre}}</p>
+                <p class="price">RS {{book.price}}</p>
+
+                <label>Quantity available: {{book.book_no}}</label>
+                {% if book.book_no < 5 and book.book_no > 0 %}
+                    <h5 style="color:red">Hurry up only {{book.book_no}} left!!</h5>
+                {% else %}
+                    <h5 style="color:red">Sorry the book is not available.</h5>
+                {% endif %}
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="row" style="display: flex;width: 50%;">
+                    <div class="block">
+                        {% if active == "1" %}
+
+                            <span><form class="navbar-form"   method="POST" >
+                                {% csrf_token %}
+                                {{ c_form| crispy }}
+                                <input type="hidden" id="book_id" name="book_id" value="{{book.id}}">
+                                <input type="hidden" id="user_id" name="user_id" value="{{user.id}}">
+                                {% if book.book_no > 0 %}
+                                    <button type="submit" class="btn btn-default cart" title="Add to Cart" name="cart-form">Add to Cart</button>
+                                {% else %}
+                                    <button type="button" class="btn btn-default cart" title="Add to Cart" name="cart-form" disabled>Add to Cart</button>
+                                {% endif %}
+                            </form></span>
+                        {% else %}
+                        <br>
+                            <a href="{% url 'user-cart' user.id %}"><button type="submit" class="btn btn-default cart" title="Add to Cart" name="cart-form">In Cart</button></a>
+                        {% endif %}
+                    </div>
+                    <div class="block">
+                        {% if activewish == "1" %}
+                            <form class="navbar-form"   method="POST" >
+                                {% csrf_token %}
+                                {{ w_form| crispy }}
+                                <input type="hidden" id="book1_id" name="book_id" value="{{book.id}}">
+                                <input type="hidden" id="user1_id" name="user_id" value="{{user.id}}">
+                                <a href="{% url 'user-wish' ">
+                                <button type="glyphicon glyphicon-heart" class="btn btn-default" title="Add to Wish List" name="wish-form">
+                                    <span class="" ><i class='far fa-heart' style='font-size:24px'></i></span>
+                                </button>
+                            </a>
+                            </form>
+                        {% else %}
+                            <a href="#"><button type="submit" class="btn btn-default cart" title="Remove from WIsh List" name="cart-form"><span class="" ><i class='fas fa-heart' style='font-size:24px'></i></span></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="block">
+                        <form action="{% url 'book-detail' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <br>
+                            <input type="hidden" id="book2_id" name="book2_id" value="{{book.id}}">
+                            <input type="hidden" id="user2_id" name="user2_id" value="{{user.id}}">
+                            {% if book.book_no > 0 %}
+                                <button style="margin-left:10px;margin-top:-10px" name="buy" type="submit" class="btn btn-default buy">BUY NOW</button>
+                            {% else %}
+                                <button style="margin-left:10px;margin-top:-10px" name="buy" type="button" class="btn btn-default buy" disabled>BUY NOW</button>
+                            {% endif %}
+                        </form>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
